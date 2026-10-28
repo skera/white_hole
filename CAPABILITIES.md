@@ -35,4 +35,4 @@
 
 ## Lightcone 运行问题入口
 
-Lightcone 第二层 workflow 需要读取 [问题处理与证据表](skills/scenarios/lightcone-deploy-config/references/troubleshooting.md)；监控使用 [滚动更新验收参考](skills/scenarios/lightcone-deploy-config/references/monitoring.md)。已收录页面加载空值误判、零实例发布资格、旧审批阻塞、diff 截图错误、监控口径与滚动新旧版本收敛问题。Caster 镜像发布统一使用 [caster-release](skills/scenarios/caster-release/SKILL.md)，升级后打分、定时报送和企微通知见其引用资料。旧名称 lightcone-caster-release-bin 仅作为兼容跳转，不再独立匹配或维护编排。
+Lightcone 第二层 workflow 需要读取 [问题处理与证据表](skills/scenarios/lightcone-deploy-config/references/troubleshooting.md)；监控使用 [滚动更新验收参考](skills/scenarios/lightcone-deploy-config/references/monitoring.md)。已收录页面加载空值误判、零实例发布资格、旧审批阻塞、diff 截图错误、监控口径与滚动新旧版本收敛问题。Caster 镜像发布统一使用 [caster-release](skills/scenarios/caster-release/SKILL.md)，升级后打分、定时报送和企微通知见其引用资料。
