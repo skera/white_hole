@@ -6,7 +6,7 @@
 
 | ID / skill | 任务意图与匹配词 | 边界 / 必要输入 | 依赖第一层 | 输出 / 完成条件 | 实证状态 | 入口 |
 | --- | --- | --- | --- | --- | --- | --- |
-| `lightcone-deploy-config` | Lightcone 发布配置、CPU/GPU gflags、批量实验配置修改 | 服务/实验/环境、参数名/类型/值、是否发布；不包含 bin 升级 | `lightcone-platform` | 保存持久化、diff 核对、部署终态、QPS/打分验收分别有证据 | 已有多服务/多实验补旗与纠错实证；GPU 已配置跳过、最多 3 个在途发布、滚动 pod 收敛验收；其他字段须现场确认 | [SKILL.md](skills/scenarios/lightcone-deploy-config/SKILL.md) |
+| `lightcone-deploy-config` | Lightcone 发布配置、CPU/GPU gflags、批量实验配置修改 | 服务/实验/环境、参数名/类型/值、是否发布；不包含 bin 升级 | `lightcone-platform` | 保存持久化、diff 核对、部署终态、QPS/打分验收分别有证据 | 已有多服务/多实验补旗与纠错实证；GPU 已配置跳过、最多 3 个在途发布、首批 1–2 个 pod 与同期存量对比验收；其他字段须现场确认 | [SKILL.md](skills/scenarios/lightcone-deploy-config/SKILL.md) |
 | `lightcone-caster-release-bin` | 明确通过 Lightcone + Caster 联合发布 bin、跨平台二进制升级 | 两平台目标映射、制品/版本、依赖顺序与兼容要求；不是单纯配置更新 | `lightcone-platform` + `caster-platform` | 两平台版本/配置对应、部署状态及业务验收；明确部分完成状态 | 待实证：编排框架，尚无联合发布的实际操作与先后顺序证据 | [SKILL.md](skills/scenarios/lightcone-caster-release-bin/SKILL.md) |
 | `caster-release` | 基于 Caster 的单平台发布、升级或发布 bin；含从 Lightcone 链接进入 | 应用/环境、发布对象、目标版本、批次及验收条件；联合发布转上一行 | `caster-platform` | 版本和目标实例一致、任务终态及监控结论 | 已实证表单/预检/确认/首批升级与打分、继续所有；全量终态仍待验收 | [SKILL.md](skills/scenarios/caster-release/SKILL.md) |
 
