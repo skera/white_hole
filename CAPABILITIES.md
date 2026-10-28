@@ -7,8 +7,7 @@
 | ID / skill | 任务意图与匹配词 | 边界 / 必要输入 | 依赖第一层 | 输出 / 完成条件 | 实证状态 | 入口 |
 | --- | --- | --- | --- | --- | --- | --- |
 | `lightcone-deploy-config` | Lightcone 发布配置、CPU/GPU gflags、批量实验配置修改 | 服务/实验/环境、参数名/类型/值、是否发布；不包含 bin 升级 | `lightcone-platform` | 保存持久化、diff 核对、部署终态、QPS/打分验收分别有证据 | 已有多服务/多实验补旗与纠错实证；GPU 已配置跳过、最多 3 个在途发布、首批 1–2 个 pod 与同期存量对比验收；其他字段须现场确认 | [SKILL.md](skills/scenarios/lightcone-deploy-config/SKILL.md) |
-| `lightcone-caster-release-bin` | 明确通过 Lightcone + Caster 联合发布 bin、跨平台二进制升级 | 两平台目标映射、制品/版本、依赖顺序与兼容要求；不是单纯配置更新 | `lightcone-platform` + `caster-platform` | 两平台版本/配置对应、部署状态及业务验收；明确部分完成状态 | 待实证：编排框架，尚无联合发布的实际操作与先后顺序证据 | [SKILL.md](skills/scenarios/lightcone-caster-release-bin/SKILL.md) |
-| `caster-release` | 基于 Caster 的单平台发布、升级或发布 bin；含从 Lightcone 链接进入 | 应用/环境、发布对象、目标版本、批次及验收条件；联合发布转上一行 | `caster-platform` | 版本和目标实例一致、任务终态及监控结论 | 已实证表单/预检/确认/首批升级与打分、继续所有；全量终态仍待验收 | [SKILL.md](skills/scenarios/caster-release/SKILL.md) |
+| `caster-release` | Caster 应用镜像/bin 发布；直接搜索 app 或从 Lightcone 服务/实验定位 | app 或服务/实验、环境/zone、镜像、范围、批次与适用监控 | `caster-platform`；Lightcone 入口按需读 `lightcone-platform` | 发布终态、实际镜像、健康接流及应用监控分别验证 | CPU/GPU 滚动发布及全量终验已实证；直接搜索入口由用户确认，专有应用指标现场核对 | [SKILL.md](skills/scenarios/caster-release/SKILL.md) |
 
 ## 第一层：平台界面与结构知识
 
@@ -20,7 +19,7 @@
 ## 路由算法
 
 1. 提取平台、目标对象（配置/bin/其他）、操作（查看/修改/保存/发布）和结果需求；沿用当前已明确的信息。
-2. 匹配第二层最具体的一行。仅通过 Lightcone 链接导航到 Caster 归 caster-release；实际需要变更两平台的联合 bin 发布优先于单平台场景；平台不明的“发布 bin”需先确定平台，不能默认为 Caster。查看发布状态也可采用对应场景的只读步骤，不因此执行发布。
+2. 匹配第二层最具体的一行。直接 Caster 搜索与 Lightcone 服务/实验导航统一归 caster-release，差异仅为 app 定位入口；另有明确配置变更时才组合 lightcone-deploy-config；平台不明的“发布 bin”需先确定平台，不能默认为 Caster。查看发布状态也可采用对应场景的只读步骤，不因此执行发布。
 3. 读取所选场景及它依赖的平台文档。满足前提时，在授权范围内执行；缺少前提时先做独立的只读工作，再请求必要信息。`待实证` 不能被当作可直接执行的操作手册。
 4. 若匹配多个场景且目标边界不同，询问会影响实施路径的最小问题；只有用户确实要求多个目标时才组合多个场景。
 5. **完全没有匹配场景**时，读取相关第一层界面知识，根据目标生成“输入 → 页面动作 → 验证输出”的临时 plan/workflow，并说明平台间依赖。如果平台界面信息尚不充分，先发现或请求平台信息，不能用不相关平台代替。
@@ -36,4 +35,4 @@
 
 ## Lightcone 运行问题入口
 
-Lightcone 第二层 workflow 需要读取 [问题处理与证据表](skills/scenarios/lightcone-deploy-config/references/troubleshooting.md)；监控使用 [滚动更新验收参考](skills/scenarios/lightcone-deploy-config/references/monitoring.md)。已收录页面加载空值误判、零实例发布资格、旧审批阻塞、diff 截图错误、监控口径与滚动新旧版本收敛问题。Caster 单平台发布使用 [caster-release](skills/scenarios/caster-release/SKILL.md)，升级后打分、定时报送和企微通知见其引用资料；联合两平台变更顺序仍待实证。
+Lightcone 第二层 workflow 需要读取 [问题处理与证据表](skills/scenarios/lightcone-deploy-config/references/troubleshooting.md)；监控使用 [滚动更新验收参考](skills/scenarios/lightcone-deploy-config/references/monitoring.md)。已收录页面加载空值误判、零实例发布资格、旧审批阻塞、diff 截图错误、监控口径与滚动新旧版本收敛问题。Caster 镜像发布统一使用 [caster-release](skills/scenarios/caster-release/SKILL.md)，升级后打分、定时报送和企微通知见其引用资料。旧名称 lightcone-caster-release-bin 仅作为兼容跳转，不再独立匹配或维护编排。
