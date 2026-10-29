@@ -16,10 +16,10 @@ description: 通过 Caster 发布或升级应用镜像/bin；支持直接搜索 
 | 用户输入 | 定位方式 | 输出 |
 | --- | --- | --- |
 | 明确 app，例如 davinci-model-server | Caster 应用管理中搜索 app，核对完整应用路径和环境 | 唯一 app ID、环境和 zone |
-| Lightcone 服务/场景，例如 ad-rank-cvrq，指定 e 或筛选条件 | 服务 → 实验 e → CPU/GPU app → Caster 链接 | 展开的 Caster app 清单，保留服务/实验映射 |
+| Lightcone 服务/场景，例如 ad-rank-cvrq，指定 e 或筛选条件 | 搜索服务后先点击左侧精确服务结果，等待详情刷新，再进入实验 e → CPU/GPU app → Caster 链接 | 展开的 Caster app 清单，保留服务/实验映射 |
 | 已有发布单链接 | 进入该单并关联应用，读取当前状态和已执行动作 | 已有单及剩余工作，不重新发单 |
 
-搜索命中同名、多个实验或 CPU/GPU 时按请求筛选，不把一个 e 等同一个 app。等待异步加载并遍历分页。Lightcone 显示的 tag 可为配置/目标版本，**实际运行镜像以 Caster 实例表为准**。Pod>0、旧tag→新tag筛选必须说明依据；混合版本应用记录每组实际数量，不把部分目标版本误作全量完成。目标列表按 app ID+环境+zone 去重。
+搜索命中同名、多个实验或 CPU/GPU 时按请求筛选，不把一个 e 等同一个 app。Lightcone 搜索后必须点击左侧精确服务结果；仅填写搜索框或依赖 URL 可能保留上一个服务的详情。点击后等待服务标题、服务树、实验列表和 App 前缀全部刷新，并校验服务名、App 前缀、实验组 e、环境和 zone 一致；任一项不一致时停止，不能继续采集或发布。等待异步加载并遍历分页。Lightcone 显示的 tag 可为配置/目标版本，**实际运行镜像以 Caster 实例表为准**。Pod>0、旧tag→新tag筛选必须说明依据；混合版本应用记录每组实际数量，不把部分目标版本误作全量完成。目标列表按 app ID+环境+zone 去重。
 
 ## 统一 Workflow
 
